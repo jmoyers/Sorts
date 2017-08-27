@@ -42,3 +42,4 @@ Debug
 *.exe
 *.out
 *.app
+/Sorts/sort_times.csv

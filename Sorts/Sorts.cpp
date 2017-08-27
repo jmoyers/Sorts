@@ -3,11 +3,17 @@
 
 #include "stdafx.h"
 #include <vector>
+#include <utility>
+#include <numeric>
 #include <iostream>
 #include <string>
 #include <iterator>
 #include <algorithm>
+#include <map>
+
 #include <random>
+#include <chrono>
+#include <fstream>
 
 using std::vector;
 using std::string;
@@ -15,6 +21,10 @@ using std::cout;
 using std::cin;
 using std::endl;
 using std::swap;
+using std::pair;
+using std::make_pair;
+using std::map;
+using std::chrono::high_resolution_clock;
 
 /* * *
 * std::sort
@@ -32,8 +42,7 @@ using std::swap;
 //  left of i = final order
 template <class iter>
 void selection_sort(iter &begin, iter &end)
-{
-  
+{  
   for (iter start_range = begin; start_range < end; start_range++)
   {
     auto min = start_range;
@@ -139,38 +148,96 @@ void shell_sort(iter &begin, iter &end)
   }
 }
 
-
-int main()
+template<class iter>
+void debug_sort(iter sorted_data, iter original_data)
 {
-  vector<int> data;
-  
-  std::default_random_engine eng;
-  std::uniform_int_distribution<int> dis(0, 100);
-
-  for (int i = 0; i < 20; i++)
-  {
-    data.push_back(dis(eng));
-    cout << data.back() << " ";
-  }
-
-  vector<int> original(data);
-
-  cout << endl;
-
-  shell_sort(data.begin(), data.end());
-
-  for (auto n : data)
+  for (auto n : sorted_data)
   {
     cout << n << " ";
   }
 
   cout << endl;
   cout << "is permutation: ";
-  cout << std::boolalpha << std::is_permutation(data.begin(), data.end(), original.begin());
+  cout << std::boolalpha << std::is_permutation(sorted_data.begin(), sorted_data.end(), original_data.begin());
   cout << endl;
   cout << "is sorted: ";
-  cout << std::boolalpha << std::is_sorted(data.begin(), data.end());
+  cout << std::boolalpha << std::is_sorted(sorted_data.begin(), sorted_data.end());
   cout << endl;
+}
+
+int main()
+{
+  constexpr size_t MAX_INPUT_SIZE = 250;
+  constexpr size_t INPUT_STEP = 10;
+  constexpr size_t ITERATION_COUNT = 50;
+
+  std::default_random_engine eng;
+  std::uniform_int_distribution<int> dis(0, 100);
+
+  using SortTime = pair<int, double>;
+  using SortData = vector<int>;
+  using Iterator = vector<int>::iterator;
+  using SortTimeEntry = pair<string, SortTime>;
+  
+  map<string, void(*)(Iterator&, Iterator&)> sort_functions {
+    {"Selection Sort", &selection_sort<Iterator>},
+    {"Insertion Sort", &insertion_sort<Iterator>},
+    {"Shell Sort", &shell_sort<Iterator>}
+  };
+
+  vector<SortTimeEntry> sort_times;
+  
+  for (auto sort : sort_functions)
+  {
+    cout << "Start " << sort.first << endl;
+    for (size_t input_size = 2; input_size < MAX_INPUT_SIZE; input_size += INPUT_STEP)
+    {
+      vector<double> iteration;
+      SortData data;
+
+      for (size_t i = 0; i < input_size; i++)
+      {
+        data.push_back(dis(eng));
+      }
+
+      for (size_t i = 0; i < ITERATION_COUNT; i++)
+      {
+        auto start = high_resolution_clock::now();
+        sort.second(data.begin(), data.end());
+        std::chrono::duration<double> sort_time = high_resolution_clock::now() - start;
+        iteration.push_back(sort_time.count());
+      }
+
+      double average_run_time = std::accumulate(iteration.begin(), iteration.end(), 0.0) / iteration.size();
+
+      SortTime run_time{ input_size, average_run_time };
+      SortTimeEntry entry{ sort.first, run_time };
+
+      sort_times.push_back(entry);
+
+      cout << input_size << " done." << endl;
+    }
+  }
+
+  std::ofstream csv;
+  csv.open("sort_times.csv");
+
+  if (csv)
+  {
+    csv << "Algorithm,Input Size,Time Elapsed" << endl;
+    for (auto time : sort_times)
+    {
+      csv << time.first << "," << time.second.first << "," << time.second.second << endl;
+    }
+
+    csv.close();
+
+    cout << "CSV of time elapsed written" << endl;
+  }
+  else
+  {
+    cout << "Cannot open sort file" << endl;
+  }
 
   cin.get();
 
