@@ -4,9 +4,6 @@ Debug
 *.tlog
 *.idb
 
-# Images
-*.png
-
 # vim
 *~
 
