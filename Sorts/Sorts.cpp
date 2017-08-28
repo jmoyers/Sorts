@@ -208,12 +208,14 @@ int main()
         iteration.push_back(sort_time.count());
       }
 
-      double average_run_time = std::accumulate(iteration.begin(), iteration.end(), 0.0) / iteration.size();
+      //double average_run_time = std::accumulate(iteration.begin(), iteration.end(), 0.0) / iteration.size();
 
-      SortTime run_time{ input_size, average_run_time };
-      SortTimeEntry entry{ sort.first, run_time };
-
-      sort_times.push_back(entry);
+      for (auto i = iteration.begin(); i < iteration.end(); i++)
+      {
+        SortTime run_time{ input_size, *i };
+        SortTimeEntry entry{ sort.first, run_time };
+        sort_times.push_back(entry);
+      }
 
       cout << input_size << " done." << endl;
     }
