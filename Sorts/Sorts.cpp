@@ -26,6 +26,13 @@ using std::make_pair;
 using std::map;
 using std::chrono::high_resolution_clock;
 
+using SortTime = pair<int, double>;
+using SortData = vector<int>;
+using Iterator = vector<int>::iterator;
+using SortTimeEntry = pair<string, SortTime>;
+using AlgorithmList = map<string, void(*)(Iterator&, Iterator&)>;
+
+
 /* * *
 * std::sort
 *  RandomAccessIterator shall point to a type for which swap is properly 
@@ -148,9 +155,81 @@ void shell_sort(iter &begin, iter &end)
   }
 }
 
+// merge sort
+//  n log(n) worst/average/best
+//  dive array into two halves
+//  recursively sort each half
+//  merge two halves
+template <class iter>
+void merge_sort(iter &begin, iter &end)
+{
+  using val_type = std::iterator_traits<iter>::value_type;
+
+  // divide
+  // find midpoint
+  size_t dis = distance(begin, end);
+
+  if (dis <= 1) return;
+
+  size_t mid = dis / 2;
+  
+  //cout << *begin << " to " << *(end - 1) << endl;
+
+  // conquer
+  // sort left and right halves
+  merge_sort(begin, begin + mid);
+  merge_sort(begin + mid, end);
+  
+  // merge
+  //  i - first half index  
+  //  j - second half index
+  //  k - index into sorted array
+  // compare i and j, move smallest into k
+  vector<val_type> aux(dis);
+  iter i = begin;
+  iter j = begin + mid;
+  iter k = aux.begin();
+
+  for (iter k = aux.begin(); k < aux.end(); k++)
+  {
+    if (j >= end)
+    {
+      std::copy(i, i + 1, k);
+      i++;
+    }
+    else if (i >= (begin + mid))
+    {
+      std::copy(j, j + 1, k);
+      j++;
+    }
+    else if (*i < *j)
+    {
+      std::copy(i, i + 1, k);
+      i++;
+    }
+    else
+    {
+      std::copy(j, j + 1, k);
+      j++;
+    }
+  }
+
+  auto aux_begin = aux.begin();
+  auto aux_end = aux.end();
+
+  std::copy(aux_begin, aux_end, begin);
+}
+
 template<class iter>
 void debug_sort(iter sorted_data, iter original_data)
 {
+  for (auto n : original_data)
+  {
+    cout << n << " ";
+  }
+  
+  cout << endl;
+  
   for (auto n : sorted_data)
   {
     cout << n << " ";
@@ -165,40 +244,41 @@ void debug_sort(iter sorted_data, iter original_data)
   cout << endl;
 }
 
-int main()
+SortData test_data(size_t input_size)
 {
-  constexpr size_t MAX_INPUT_SIZE = 250;
-  constexpr size_t INPUT_STEP = 10;
-  constexpr size_t ITERATION_COUNT = 50;
-
-  std::default_random_engine eng;
+  std::random_device rd;
+  std::mt19937 eng(rd());
   std::uniform_int_distribution<int> dis(0, 100);
+  SortData data;
 
-  using SortTime = pair<int, double>;
-  using SortData = vector<int>;
-  using Iterator = vector<int>::iterator;
-  using SortTimeEntry = pair<string, SortTime>;
+  for (size_t i = 0; i < input_size; i++)
+  {
+    data.push_back(dis(eng));
+  }
+
+  return data;
+}
+
+void time_sorts(AlgorithmList sort_functions = AlgorithmList({
+  { "Selection Sort", &selection_sort<Iterator> },
+  { "Insertion Sort", &insertion_sort<Iterator> },
+  { "Shell Sort", &shell_sort<Iterator> },
+  { "Merge Sort", &merge_sort<Iterator> }
+}))
+{
+  constexpr size_t MAX_INPUT_SIZE = 400;
+  constexpr size_t INPUT_STEP = 20;
+  constexpr size_t ITERATION_COUNT = 25; 
   
-  map<string, void(*)(Iterator&, Iterator&)> sort_functions {
-    {"Selection Sort", &selection_sort<Iterator>},
-    {"Insertion Sort", &insertion_sort<Iterator>},
-    {"Shell Sort", &shell_sort<Iterator>}
-  };
-
   vector<SortTimeEntry> sort_times;
-  
+
   for (auto sort : sort_functions)
   {
     cout << "Start " << sort.first << endl;
     for (size_t input_size = 2; input_size < MAX_INPUT_SIZE; input_size += INPUT_STEP)
     {
       vector<double> iteration;
-      SortData data;
-
-      for (size_t i = 0; i < input_size; i++)
-      {
-        data.push_back(dis(eng));
-      }
+      SortData data = test_data(input_size);
 
       for (size_t i = 0; i < ITERATION_COUNT; i++)
       {
@@ -207,8 +287,6 @@ int main()
         std::chrono::duration<double> sort_time = high_resolution_clock::now() - start;
         iteration.push_back(sort_time.count());
       }
-
-      //double average_run_time = std::accumulate(iteration.begin(), iteration.end(), 0.0) / iteration.size();
 
       for (auto i = iteration.begin(); i < iteration.end(); i++)
       {
@@ -240,7 +318,12 @@ int main()
   {
     cout << "Cannot open sort file" << endl;
   }
+}
 
+int main()
+{
+  time_sorts();
+ 
   cin.get();
 
   return 0;
