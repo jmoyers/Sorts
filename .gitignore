@@ -40,3 +40,4 @@ Debug
 *.out
 *.app
 /Sorts/sort_times.csv
+.Rproj.user
