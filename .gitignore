@@ -3,6 +3,12 @@ Debug
 .vs
 *.tlog
 *.idb
+*.vspx
+x64
+
+# R
+*.Rdata
+*.Rhistory
 
 # vim
 *~

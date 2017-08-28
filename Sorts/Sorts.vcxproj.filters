@@ -24,6 +24,15 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Performance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -32,10 +41,17 @@
     <ClCompile Include="Sorts.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="GraphElapsedTime.R">
-      <Filter>Source Files</Filter>
-    </None>
+    <ClCompile Include="Selection.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Insertion.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Merge.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shell.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
