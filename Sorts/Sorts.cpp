@@ -14,7 +14,7 @@ using std::cout;
 
 int main()
 {
-  SortPerformance::time_sorts();
+  SortPerformance::measure_sorts();
 
   return 0;
 }

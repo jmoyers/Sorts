@@ -44,10 +44,8 @@ void quick_sort(iter &begin, iter &end)
 {
   if (begin == end) return;
   
-  auto p = partition(begin, end);  
+  auto p = partition(begin, end);
   
-  quick_sort(begin, p);  
+  quick_sort(begin, p);
   quick_sort(p + 1, end);
 }
-
-

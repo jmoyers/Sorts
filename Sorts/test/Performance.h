@@ -19,11 +19,17 @@ using std::vector;
 namespace SortPerformance
 {
 
+#ifdef _DEBUG
 constexpr size_t MAX_INPUT_SIZE   = 1000;
 constexpr size_t INPUT_STEP       = 100;
 constexpr size_t ITERATION_COUNT  = 20;
+#else
+constexpr size_t MAX_INPUT_SIZE = 1000 * 10;
+constexpr size_t INPUT_STEP = 100 * 10;
+constexpr size_t ITERATION_COUNT = 20;
+#endif
 
-void time_sorts(AlgorithmList sort_functions = AlgorithmList({
+void measure_sorts(AlgorithmList sort_functions = AlgorithmList({
   { "Selection Sort", &selection_sort<Iterator> },
   { "Insertion Sort", &insertion_sort<Iterator> },
   { "Shell Sort", &shell_sort<Iterator> },
