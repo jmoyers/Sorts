@@ -6,11 +6,15 @@
 #include "Insertion.h"
 #include "Shell.h"
 #include "Merge.h"
+#include "Quick.h"
 #include "Performance.h"
+
+using std::cin;
+using std::cout;
 
 int main()
 {
-  time_sorts();
+  SortPerformance::time_sorts();
 
   return 0;
 }

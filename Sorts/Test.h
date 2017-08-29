@@ -10,8 +10,11 @@
 using std::cout;
 using std::endl;
 
+namespace SortTests
+{
+
 template<class iter>
-void debug_sort(iter sorted_data, iter original_data)
+bool test_sort(iter sorted_data, iter original_data)
 {
   for (auto n : original_data)
   {
@@ -25,13 +28,18 @@ void debug_sort(iter sorted_data, iter original_data)
     cout << n << " ";
   }
 
+  bool is_sorted = std::is_sorted(sorted_data.begin(), sorted_data.end());
+  bool is_permutation = std::is_permutation(sorted_data.begin(), sorted_data.end(), original_data.begin());
+
   cout << endl;
   cout << "is permutation: ";
-  cout << std::boolalpha << std::is_permutation(sorted_data.begin(), sorted_data.end(), original_data.begin());
+  cout << std::boolalpha << is_permutation;
   cout << endl;
   cout << "is sorted: ";
-  cout << std::boolalpha << std::is_sorted(sorted_data.begin(), sorted_data.end());
+  cout << std::boolalpha << is_sorted;
   cout << endl;
+
+  return is_sorted && is_permutation;
 }
 
 SortData gen_fixture(size_t input_size)
@@ -61,3 +69,18 @@ SortData gen_nearly_sorted_fixture(size_t input_size)
   auto data = gen_sorted_fixture(input_size);
   return data;
 }
+
+void test_with_input(size_t size, void(*fn)(Iterator&, Iterator&))
+{
+  constexpr int ENTER = 10;
+
+  do {
+    auto fixture = gen_fixture(size);
+    auto orig(fixture);
+
+    fn(fixture.begin(), fixture.end());
+    test_sort(fixture, orig);
+  } while (std::cin.get() == ENTER);
+}
+
+} // SortTests

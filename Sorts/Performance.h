@@ -5,6 +5,7 @@
 #include "Insertion.h"
 #include "Shell.h"
 #include "Merge.h"
+#include "Quick.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -15,8 +16,11 @@ using std::cout;
 using std::endl;
 using std::vector;
 
-constexpr size_t MAX_INPUT_SIZE   = 100'000;
-constexpr size_t INPUT_STEP       = 10000;
+namespace SortPerformance
+{
+
+constexpr size_t MAX_INPUT_SIZE   = 1000;
+constexpr size_t INPUT_STEP       = 100;
 constexpr size_t ITERATION_COUNT  = 20;
 
 void time_sorts(AlgorithmList sort_functions = AlgorithmList({
@@ -24,6 +28,7 @@ void time_sorts(AlgorithmList sort_functions = AlgorithmList({
   { "Insertion Sort", &insertion_sort<Iterator> },
   { "Shell Sort", &shell_sort<Iterator> },
   { "Merge Sort", &merge_sort<Iterator> },
+  { "Quick Sort", &quick_sort<Iterator> },
   { "std::sort", &std::sort<Iterator&> }
 }), size_t max_input_size = MAX_INPUT_SIZE
   , size_t input_step = INPUT_STEP
@@ -37,7 +42,7 @@ void time_sorts(AlgorithmList sort_functions = AlgorithmList({
     for (size_t input_size = 2; input_size < max_input_size; input_size += input_step)
     {
       vector<double> iteration;
-      SortData data = gen_fixture(input_size);
+      SortData data = SortTests::gen_fixture(input_size);
 
       for (size_t i = 0; i < iteration_count; i++)
       {
@@ -77,3 +82,5 @@ void time_sorts(AlgorithmList sort_functions = AlgorithmList({
     cout << "Cannot open sort file" << endl;
   }
 }
+
+} // SortPerformance
