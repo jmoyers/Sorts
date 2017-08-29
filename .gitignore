@@ -5,6 +5,7 @@ Debug
 *.idb
 *.vspx
 x64
+builds
 
 # R
 *.Rdata

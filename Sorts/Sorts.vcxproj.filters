@@ -21,16 +21,28 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Test.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Performance.h">
+    <ClInclude Include="algorithms\Insertion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Quick.h">
+    <ClInclude Include="algorithms\Merge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithms\Quick.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithms\Selection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="algorithms\Shell.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\Performance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test\Test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -40,18 +52,6 @@
     </ClCompile>
     <ClCompile Include="Sorts.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Selection.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Insertion.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Merge.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Shell.h">
-      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

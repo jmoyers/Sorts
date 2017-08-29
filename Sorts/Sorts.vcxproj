@@ -72,15 +72,27 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>.\builds\</OutDir>
+    <IntDir>.\builds\</IntDir>
+    <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <OutDir>.\builds\</OutDir>
+    <IntDir>.\builds\</IntDir>
+    <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>.\builds\</OutDir>
+    <IntDir>.\builds\</IntDir>
+    <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>.\builds\</OutDir>
+    <IntDir>.\builds\</IntDir>
+    <TargetName>$(ProjectName)_$(Platform)_$(Configuration)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -89,6 +101,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\dev\Sorts\Sorts\algorithms;D:\dev\Sorts\Sorts\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -102,6 +115,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\dev\Sorts\Sorts\algorithms;D:\dev\Sorts\Sorts\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -117,6 +131,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\dev\Sorts\Sorts\algorithms;D:\dev\Sorts\Sorts\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -134,6 +149,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\dev\Sorts\Sorts\algorithms;D:\dev\Sorts\Sorts\test;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,18 +159,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Performance.h" />
-    <ClInclude Include="Quick.h" />
+    <ClInclude Include="algorithms\Insertion.h" />
+    <ClInclude Include="algorithms\Merge.h" />
+    <ClInclude Include="algorithms\Quick.h" />
+    <ClInclude Include="algorithms\Selection.h" />
+    <ClInclude Include="algorithms\Shell.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Test.h" />
+    <ClInclude Include="test\Performance.h" />
+    <ClInclude Include="test\Test.h" />
     <ClInclude Include="Types.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Insertion.h" />
-    <ClCompile Include="Merge.h" />
-    <ClCompile Include="Shell.h" />
-    <ClCompile Include="Selection.h" />
     <ClCompile Include="Sorts.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
