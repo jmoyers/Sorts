@@ -1,5 +1,5 @@
 # Sorts
-* Test implementation of selection, insertion, shell sorts on c++ iterators
+* Test implementation of selection, insertion, shell, quick, and merge sorts on c++ iterators
 * Screwing around with R to produce a plot of input size and execution time
 
 # Performance
