@@ -10,4 +10,7 @@ Debug
 ![Sort Execution Time: Debug](https://raw.githubusercontent.com/jmoyers/Sorts/master/Sorts/sorts.png)
 
 Release
-![Sort Execution Time: Debug](https://raw.githubusercontent.com/jmoyers/Sorts/master/Sorts/sorts_release.png)
+![Sort Execution Time: Release](https://raw.githubusercontent.com/jmoyers/Sorts/master/Sorts/sorts_release.png)
+
+Log-log
+![Sort Execution Time: Release/Log-log](https://raw.githubusercontent.com/jmoyers/Sorts/master/Sorts/loglog.png)
