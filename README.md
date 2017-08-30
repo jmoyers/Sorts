@@ -6,4 +6,8 @@
 * This is with a uniform random input of varying size
 * Known improvements could be made for merge sort (removing temporary array allocation)
 
-![Sort Execution Time: Debug](https://raw.githubusercontent.com/jmoyers/Sorts/master/Sorts/bigo_overlay.png)
+Debug
+![Sort Execution Time: Debug](https://raw.githubusercontent.com/jmoyers/Sorts/master/Sorts/sorts.png)
+
+Release
+![Sort Execution Time: Debug](https://raw.githubusercontent.com/jmoyers/Sorts/master/Sorts/sorts_release.png)
