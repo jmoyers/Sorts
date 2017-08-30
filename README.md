@@ -4,10 +4,6 @@
 
 # Performance
 * This is with a uniform random input of varying size
-* Both debug and release config shown
 * Known improvements could be made for merge sort (removing temporary array allocation)
 
-![Sort Execution Time: Debug](https://raw.githubusercontent.com/jmoyers/Sorts/master/Sorts/sorts.png)
-
-Release Perf
-![Sort Execution Time: Release](https://raw.githubusercontent.com/jmoyers/Sorts/master/Sorts/sorts_release.png)
+![Sort Execution Time: Debug](https://raw.githubusercontent.com/jmoyers/Sorts/master/Sorts/bigo_overlay.png)
