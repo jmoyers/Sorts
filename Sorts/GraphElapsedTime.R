@@ -1,3 +1,6 @@
+# attempt at n, n log n, n^2 overlay. not sure how to decide the upper
+# and lower bounds (what coefficients should be) given data at this scale
+
 library(ggplot2)
 library(reshape2)
 library(gam)
@@ -23,19 +26,19 @@ sort_predictions <- do.call("rbind", sort_predictions)
 
 nlogn <- data.frame(
   Input.Size = x,
-  Time.Elapsed = (x * log10(x)),
+  Time.Elapsed = (x * log10(x)) * 50,
   Algorithm = "n log n"
 )
 
 nsquared <- data.frame(
   Input.Size = x,
-  Time.Elapsed = (x * x),
+  Time.Elapsed = (x * x) * 50,
   Algorithm = "n^2"
 )
 
 n <- data.frame(
   Input.Size = x,
-  Time.Elapsed = x,
+  Time.Elapsed = x * 50,
   Algorithm = "n"
 )
 
